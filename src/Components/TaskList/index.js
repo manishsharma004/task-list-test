@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TaskService from '../../Services/TaskService';
+import { Row, Col } from 'react-bootstrap';
 
 
 class TaskDetails extends Component {
@@ -12,9 +13,20 @@ class TaskDetails extends Component {
         const { taskName } = task;
 
         return (
-            <div className="task-details">
-                <div className="name">{taskName}</div>
-            </div>
+            <Row className="task-details">
+                <Col xs={3}>
+                    <div className="name">{taskName}</div>
+                </Col>
+                <Col xs={3}>
+                    <div className="name">{taskName}</div>
+                </Col>
+                <Col xs={3}>
+                    <div className="name">{taskName}</div>
+                </Col>
+                <Col xs={3}>
+                    
+                </Col>
+            </Row>
         );
     }
 }
@@ -27,9 +39,11 @@ class Task extends Component {
     render() {
         const { task } = this.props;
         return (
-            <div className="task" id={"task-" + task.taskId}>
-                <TaskDetails task={task} />
-            </div>
+            <Row className="task" id={"task-" + task.taskId} style={{padding: "10px"}}>
+                <Col xs={10} xsOffset={0}>
+                    <TaskDetails style={{pading: "10px"}}task={task} />
+                </Col>
+            </Row>
         )
     }
 }
@@ -50,15 +64,17 @@ export default class TaskList extends Component {
         const { tasks } = this.state;
         console.log(tasks);
         return (
-            <div id="tasks">
-                {
-                    (tasks && tasks.length > 0)?
-                        tasks.map(task => <Task  key={task.taskId} task={task} />):
-                        (<div id="no-task-found" className="no-task-found">
-                            There are no tasks at present.
-                        </div>)
-                }
-            </div>
+            <Row id="tasks">
+                <Col xs={12}>
+                    {
+                        (tasks && tasks.length > 0)?
+                            tasks.map(task => <Task  key={task.taskId} task={task} />):
+                            (<div id="no-task-found" className="no-task-found">
+                                There are no tasks at present.
+                            </div>)
+                    }
+                </Col>
+            </Row>
         )
     }
 }
